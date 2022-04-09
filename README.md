@@ -2,7 +2,7 @@
 
 API to hold all user related services.
 
-# Repository
+# Repo
 
 https://github.com/vickychenw/vc-user-service
 
