@@ -1,0 +1,155 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"description": "This documentation will describe the API usage for User Service",
+		"version": "1.0",
+		"title": "User Service",
+		"contact": {
+			"email": "vickychenw@gmail.com"
+		}
+	},
+	"basePath": "/api/v1",
+	"tags": [
+		{
+			"name": "user",
+			"description": "Operations with user"
+		}
+	],
+	"schemes": ["https", "http"],
+	"paths": {
+		"/user": {
+			"get": {
+				"tags": ["user"],
+				"description": "This route returns user information",
+				"summary": "Get user based on search criteria",
+				"operationId": "selectuser",
+				"parameters": [
+					{
+						"in": "header",
+						"name": "apisharedkey",
+						"required": true,
+						"type": "string",
+						"description": "Shared API Key"
+					},
+					{
+						"in": "header",
+						"name": "userId",
+						"required": false,
+						"type": "string",
+						"description": "User ID"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "User Found",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"__id": {
+										"type": "string",
+										"example": "alphanumeric"
+									},
+									"firstName": {
+										"type": "string",
+										"example": "Joe"
+									},
+									"lastName": {
+										"type": "string",
+										"example": "Doe"
+									},
+									"email": {
+										"type": "string",
+										"example": "joe.doe@email.com"
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"schema": {
+							"$ref": "#/definitions/BadRequest"
+						}
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"BadRequest": {
+			"type": "object",
+			"properties": {
+				"errors": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"msg": {
+								"type": "string",
+								"example": "Invalid value"
+							},
+							"param": {
+								"type": "string",
+								"example": "ParamName"
+							},
+							"location": {
+								"type": "string",
+								"example": "body"
+							}
+						}
+					}
+				}
+			}
+		},
+
+		"NewUser": {
+			"type": "object",
+			"properties": {
+				"user": {
+					"type": "object",
+					"properties": {
+						"__id": {
+							"type": "string",
+							"maxLength": 255,
+							"example": "alphanumeric"
+						},
+						"lastName": {
+							"type": "string",
+							"maxLength": 255,
+							"example": "Doe"
+						},
+						"firstName": {
+							"type": "string",
+							"maxLength": 255,
+							"example": "John"
+						},
+						"email": {
+							"type": "string",
+							"maxLength": 255,
+							"example": "John.Doe@gmail.com"
+						}
+					},
+					"required": [
+						"userRole",
+						"lastName",
+						"firstName",
+						"lang",
+						"approveDate",
+						"approveBy"
+					]
+				}
+			}
+		}
+	}
+}
