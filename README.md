@@ -2,6 +2,10 @@
 
 API to hold all user related services.
 
+# Repo
+
+https://github.com/vickychenw/vc-user-service
+
 ## Getting started
 
 ```bash
